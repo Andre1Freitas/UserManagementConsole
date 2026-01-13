@@ -21,9 +21,9 @@ The application emphasizes:
 - Search for a user by name
 - Remove a user from the system
 
-## Version 2 – File Persistence
+## 🚀 Version 2 – File Persistence (Planned)
 
-The application now supports:
+The next version of the application will include:
 - Saving users to a CSV file
 - Loading users automatically on startup
 - Data persistence between executions
@@ -41,9 +41,7 @@ UserManagementConsole/
 ├── Utils/
 │   └── Validacoes.cs
 ├── Program.cs
-├── UserManagement.csproj
-└── Repositories/
-	└── UserCsvRepositorie.cs
+└── UserManagement.csproj
 ```
 
 **Entities**  
@@ -65,13 +63,19 @@ Contains validation logic shared across the application.
 ---
 
 ## ▶️ How to Run
-```bash
 1. Clone the repository:
+```bash
 git clone https://github.com/Andre1Freitas/UserManagementConsole.git
+```
 2. Navigate to the project folder:
+```bash
 cd UserManagementConsole
+```
 3. Restore dependencies:
+```bash
 dotnet restore
+```
 4. Run the application:
+```bash
 dotnet run
 ```
