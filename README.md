@@ -21,6 +21,13 @@ The application emphasizes:
 - Search for a user by name
 - Remove a user from the system
 
+## Version 2 – File Persistence
+
+The application now supports:
+- Saving users to a CSV file
+- Loading users automatically on startup
+- Data persistence between executions
+
 ---
 
 ## 🧱 Project Structure
@@ -34,7 +41,9 @@ UserManagementConsole/
 ├── Utils/
 │   └── Validacoes.cs
 ├── Program.cs
-└── UserManagement.csproj
+├── UserManagement.csproj
+└── Repositories/
+	└── UserCsvRepositorie.cs
 ```
 
 **Entities**  
