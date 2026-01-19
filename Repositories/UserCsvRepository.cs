@@ -65,4 +65,21 @@ class UserCsvRepository : IUserRepository
             }
         }
     }
+    public void Save()
+    {
+        using (StreamWriter sw = new StreamWriter(_filePath))
+        {
+            sw.WriteLine("Nome;Idade;Email");
+
+            foreach(Pessoa p in pessoas)
+            {
+                sw.WriteLine($"{p.Nome};{p.Idade};{p.Email}");
+            }
+        }
+    }
+
+    public void Add(Pessoa pessoa)
+    {
+        pessoas.Add(pessoa);
+    }
 }
