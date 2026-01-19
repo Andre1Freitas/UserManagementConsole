@@ -71,7 +71,7 @@ class UserCsvRepository : IUserRepository
         {
             sw.WriteLine("Nome;Idade;Email");
 
-            foreach(Pessoa p in pessoas)
+            foreach (Pessoa p in pessoas)
             {
                 sw.WriteLine($"{p.Nome};{p.Idade};{p.Email}");
             }
@@ -81,5 +81,24 @@ class UserCsvRepository : IUserRepository
     public void Add(Pessoa pessoa)
     {
         pessoas.Add(pessoa);
+    }
+    public void Remove(string nome)
+    {
+        Pessoa pessoaRemover = GetByName(nome);
+
+        if (pessoaRemover != null)
+        {
+            pessoas.Remove(pessoaRemover);
+        }
+    }
+
+    public List<Pessoa> GetAll()
+    {
+        return pessoas;
+    }
+
+    public Pessoa GetByName(string nome)
+    {
+        return pessoas.FirstOrDefault(x => x.Nome == nome);
     }
 }
