@@ -1,38 +1,39 @@
 ﻿using UserManagementConsole.Entities;
+using UserManagementConsole.Interfaces;
 
 namespace UserManagementConsole.Services
 {
     class GerenciadorPessoas
     {
-        List<Pessoa> Pessoas = new List<Pessoa>();
+        private readonly IUserRepository _repository;
+
+        public GerenciadorPessoas(IUserRepository repository)
+        {
+            _repository = repository;
+            _repository.Load();
+        }
 
         public void CadastrarNovaPessoa(Pessoa p)
         {
-            Pessoas.Add(p);
+            _repository.Add(p);
+            _repository.Save();
         }
 
         public void RemoverPessoa(string nome)
         {
-            Pessoa p = ProcuraUmaPessoaNaLista(nome);
-            Pessoas.Remove(p);
+            _repository.Remove(nome);
+            _repository.Save();
         }
         public void PercorrerLista()
         {
-            foreach (Pessoa p in Pessoas)
+            foreach (Pessoa p in _repository.GetAll())
             {
                 Console.WriteLine(p);
             }
         }
         public Pessoa ProcuraUmaPessoaNaLista(String nome)
         {
-            foreach (Pessoa p in Pessoas)
-            {
-                if (p.Nome == nome)
-                {
-                    return p;
-                }
-            }
-            return null;
+            return _repository.GetByName(nome);
         }
     }
 }

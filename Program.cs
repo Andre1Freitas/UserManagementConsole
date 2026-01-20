@@ -1,6 +1,8 @@
 ﻿using UserManagementConsole.Services;
 using UserManagementConsole.Entities;
 using UserManagementConsole.Utils;
+using UserManagementConsole.Interfaces;
+using UserManagementConsole.Repositories;
 
 namespace UserManagementConsole
 {
@@ -8,9 +10,10 @@ namespace UserManagementConsole
     {
         static void Main(string[] args)
         {
-            int opcao = 1;
-            GerenciadorPessoas gerenciador = new GerenciadorPessoas();
+            IUserRepository repository = new UserCsvRepository();
+            GerenciadorPessoas gerenciador = new GerenciadorPessoas(repository);
 
+            int opcao = 1;
             while (opcao > 0)
             {
                 Console.WriteLine("Selecione uma opção");
