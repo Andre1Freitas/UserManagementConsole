@@ -19,9 +19,14 @@ namespace UserManagementConsole.Services
             _repository.Save();
         }
 
-        public void RemoverPessoa(string nome)
+        public void RemoverPessoa(Guid id)
         {
-            _repository.Remove(nome);
+            _repository.Remove(id);
+            _repository.Save();
+        }
+        public void Edit(Guid id, Pessoa novaPessoa)
+        {
+            _repository.Edit(id, novaPessoa);
             _repository.Save();
         }
         public void PercorrerLista()
@@ -31,9 +36,9 @@ namespace UserManagementConsole.Services
                 Console.WriteLine(p);
             }
         }
-        public Pessoa ProcuraUmaPessoaNaLista(String nome)
+        public Pessoa ProcuraUmaPessoaNaLista(Guid id)
         {
-            return _repository.GetByName(nome);
+            return _repository.GetById(id);
         }
     }
 }
