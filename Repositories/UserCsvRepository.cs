@@ -1,4 +1,11 @@
-﻿using UserManagementConsole.Entities;
+﻿// DESCONTINUADO: Primeira versão com CSV
+// Mantido para referência histórica
+// Versão atual: UserJsonRepository
+
+
+
+/*
+using UserManagementConsole.Entities;
 using UserManagementConsole.Interfaces;
 using UserManagementConsole.Utils;
 
@@ -109,3 +116,5 @@ namespace UserManagementConsole.Repositories
         }
     }
 }
+
+*/
