@@ -40,5 +40,9 @@ namespace UserManagementConsole.Services
         {
             return _repository.GetById(id);
         }
+        public List<Pessoa> GetAll()
+        {
+            return _repository.GetAll();
+        }
     }
 }
