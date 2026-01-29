@@ -18,7 +18,13 @@ namespace UserManagementConsole
             while (opcao != 0)
             {
                 opcao = menu.ExibirMenuELerOpcao();
-
+                if (opcao < 0 || opcao > 5)
+                {
+                    Console.WriteLine("Opção invalida!\n[Pressione Enter para continuar]");
+                    menu.AguardarTecla();
+                    menu.LimparTela();
+                    continue;
+                }
                 switch (opcao)
                 {
                     case 0: break;
@@ -31,8 +37,14 @@ namespace UserManagementConsole
 
                     case 2:
                         Pessoa pessoaDeletar = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
-                        gerenciador.RemoverPessoa(pessoaDeletar.Id);
-                        menu.ExibirMensagem("Pessoa excluida com sucesso!\n[Pressione Enter para continuar]");
+                        if (menu.ConfirmarAcao($"Tem certeza que deseja remover {pessoaDeletar.Nome}? (s/n):"))
+                        {
+                            gerenciador.RemoverPessoa(pessoaDeletar.Id);
+                            menu.ExibirMensagem("Pessoa excluida com sucesso!\n[Pressione Enter para continuar]");
+                            menu.AguardarTecla();
+                            break;
+                        }
+                        menu.ExibirMensagem("Pessoa não foi excluida!\n[Pressione Enter para continuar]");
                         menu.AguardarTecla();
                         break;
 

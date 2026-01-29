@@ -120,7 +120,20 @@ namespace UserManagementConsole.Utils
                     Console.WriteLine("Numero invalido! Tente novamente");
                     continue;
                 }
-                return pessoas[num-1];
+                return pessoas[num - 1];
+            }
+        }
+        public bool ConfirmarAcao(string msg)
+        {
+            while (true)
+            {
+                Console.Write(msg);
+                string? input = Console.ReadLine()?.ToLower();
+
+                if (input == "s") return true;
+                if (input == "n") return false;
+
+                Console.WriteLine("Resposta invalida! Digite 's' para sim ou 'n' para não.");
             }
         }
     }
