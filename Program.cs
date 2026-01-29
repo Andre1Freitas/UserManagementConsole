@@ -25,11 +25,15 @@ namespace UserManagementConsole
 
                     case 1:
                         gerenciador.CadastrarNovaPessoa(menu.ColetarDadosNovaPessoa());
+                        menu.ExibirMensagem("Pessoa cadastrada com sucesso!\n[Pressione Enter para continuar]");
+                        menu.AguardarTecla();
                         break;
 
                     case 2:
                         Pessoa pessoaDeletar = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
                         gerenciador.RemoverPessoa(pessoaDeletar.Id);
+                        menu.ExibirMensagem("Pessoa excluida com sucesso!\n[Pressione Enter para continuar]");
+                        menu.AguardarTecla();
                         break;
 
                     case 3:
@@ -47,6 +51,8 @@ namespace UserManagementConsole
                         Pessoa pessoaAntiga = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
                         Pessoa pessoaAtualizada = menu.ColetarDadosNovaPessoa();
                         gerenciador.Edit(pessoaAntiga.Id, pessoaAtualizada);
+                        menu.ExibirMensagem("Pessoa editada com sucesso!\n[Pressione Enter para continuar]");
+                        menu.AguardarTecla();
                         break;
                 }
                 menu.LimparTela();
