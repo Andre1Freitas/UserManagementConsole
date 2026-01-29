@@ -13,7 +13,8 @@ namespace UserManagementConsole.Utils
             Console.WriteLine("4 - Procurar uma pessoa da lista");
             Console.WriteLine("5 - Editar uma pessoa da lista");
             Console.WriteLine("0 - Sair");
-            return int.Parse(Console.ReadLine()!);
+            if (int.TryParse(Console.ReadLine()!, out int a)) return a;
+            return -1;
         }
 
         public void ExibirLista(List<Pessoa> pessoas)
@@ -114,13 +115,17 @@ namespace UserManagementConsole.Utils
             while (true)
             {
                 Console.WriteLine("Escreva o numero da pessoa: ");
-                int num = int.Parse(Console.ReadLine());
-                if (num < 1 || num > pessoas.Count)
+                if (int.TryParse(Console.ReadLine(), out int num))
                 {
-                    Console.WriteLine("Numero invalido! Tente novamente");
-                    continue;
+                    if (num < 1 || num > pessoas.Count)
+                    {
+                        Console.WriteLine("Numero invalido! Tente novamente");
+                        continue;
+                    }
+                    return pessoas[num - 1];
                 }
-                return pessoas[num - 1];
+                Console.WriteLine("Entrada invalida! Digite apenas numeros");
+                continue;
             }
         }
         public bool ConfirmarAcao(string msg)
