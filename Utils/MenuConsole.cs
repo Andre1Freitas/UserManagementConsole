@@ -21,7 +21,7 @@ namespace UserManagementConsole.Utils
         {
             if (pessoas.Count == 0)
             {
-                Console.WriteLine("Nenhuma pessoa cadastrada");
+                ExibirMensagem("Nenhuma pessoa cadastrada", ConsoleColor.Red);
                 return;
             }
             for (int i = 0; i < pessoas.Count; i++)
@@ -33,6 +33,12 @@ namespace UserManagementConsole.Utils
         public void ExibirMensagem(string msg)
         {
             Console.WriteLine(msg);
+        }
+        public void ExibirMensagem(string msg, ConsoleColor cor)
+        {
+            Console.ForegroundColor = cor;
+            Console.WriteLine(msg);
+            Console.ResetColor();
         }
 
         public void LimparTela()
@@ -53,7 +59,7 @@ namespace UserManagementConsole.Utils
             var resultNome = Validacoes.ValidarNome(nome);
             while (!resultNome.isValido)
             {
-                Console.WriteLine(resultNome.mensagemErro);
+                ExibirMensagem($"{resultNome.mensagemErro}", ConsoleColor.Red);
                 nome = Console.ReadLine();
                 resultNome = Validacoes.ValidarNome(nome);
             }
@@ -70,12 +76,13 @@ namespace UserManagementConsole.Utils
                 if (!int.TryParse(Console.ReadLine(), out idade))
                 {
                     Console.WriteLine("Idade Invalida. Digite um numero inteiro valido.");
+                    ExibirMensagem("Idade Invalida. Digite um numero inteiro valido.", ConsoleColor.Red);
                     continue;
                 }
                 resultIdade = Validacoes.ValidarIdade(idade);
                 if (!resultIdade.isValido)
                 {
-                    Console.WriteLine(resultIdade.mensagemErro);
+                    ExibirMensagem($"{resultIdade.mensagemErro}", ConsoleColor.Red);
                     continue;
                 }
                 break;
@@ -90,7 +97,7 @@ namespace UserManagementConsole.Utils
             var resultEmail = Validacoes.ValidarEmail(email);
             while (!resultEmail.isValido)
             {
-                Console.WriteLine(resultEmail.mensagemErro);
+                ExibirMensagem($"{resultEmail.mensagemErro}", ConsoleColor.Red);
                 email = Console.ReadLine();
                 resultEmail = Validacoes.ValidarEmail(email);
             }
@@ -119,12 +126,12 @@ namespace UserManagementConsole.Utils
                 {
                     if (num < 1 || num > pessoas.Count)
                     {
-                        Console.WriteLine("Numero invalido! Tente novamente");
+                        ExibirMensagem("Numero invalido! Tente novamente", ConsoleColor.Red);
                         continue;
                     }
                     return pessoas[num - 1];
                 }
-                Console.WriteLine("Entrada invalida! Digite apenas numeros");
+                ExibirMensagem("Entrada invalida! Digite apenas numeros", ConsoleColor.Red);
                 continue;
             }
         }
@@ -132,14 +139,15 @@ namespace UserManagementConsole.Utils
         {
             while (true)
             {
-                Console.Write(msg);
+                ExibirMensagem(msg, ConsoleColor.Yellow);
                 string? input = Console.ReadLine()?.ToLower();
 
                 if (input == "s") return true;
                 if (input == "n") return false;
 
-                Console.WriteLine("Resposta invalida! Digite 's' para sim ou 'n' para não.");
+                ExibirMensagem("Resposta invalida! Digite 's' para sim ou 'n' para não.", ConsoleColor.Red);
             }
         }
     }
+
 }

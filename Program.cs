@@ -20,7 +20,7 @@ namespace UserManagementConsole
                 opcao = menu.ExibirMenuELerOpcao();
                 if (opcao < 0 || opcao > 5)
                 {
-                    Console.WriteLine("Opção invalida!\n[Pressione Enter para continuar]");
+                    menu.ExibirMensagem("Opção invalida!\n[Pressione Enter para continuar]", ConsoleColor.Red);
                     menu.AguardarTecla();
                     menu.LimparTela();
                     continue;
@@ -31,7 +31,7 @@ namespace UserManagementConsole
 
                     case 1:
                         gerenciador.CadastrarNovaPessoa(menu.ColetarDadosNovaPessoa());
-                        menu.ExibirMensagem("Pessoa cadastrada com sucesso!\n[Pressione Enter para continuar]");
+                        menu.ExibirMensagem("Pessoa cadastrada com sucesso!\n[Pressione Enter para continuar]", ConsoleColor.Green);
                         menu.AguardarTecla();
                         break;
 
@@ -40,11 +40,11 @@ namespace UserManagementConsole
                         if (menu.ConfirmarAcao($"Tem certeza que deseja remover {pessoaDeletar.Nome}? (s/n):"))
                         {
                             gerenciador.RemoverPessoa(pessoaDeletar.Id);
-                            menu.ExibirMensagem("Pessoa excluida com sucesso!\n[Pressione Enter para continuar]");
+                            menu.ExibirMensagem("Pessoa excluida com sucesso!\n[Pressione Enter para continuar]", ConsoleColor.Green);
                             menu.AguardarTecla();
                             break;
                         }
-                        menu.ExibirMensagem("Pessoa não foi excluida!\n[Pressione Enter para continuar]");
+                        menu.ExibirMensagem("Pessoa não foi excluida!\n[Pressione Enter para continuar]", ConsoleColor.Red);
                         menu.AguardarTecla();
                         break;
 
@@ -63,7 +63,7 @@ namespace UserManagementConsole
                         Pessoa pessoaAntiga = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
                         Pessoa pessoaAtualizada = menu.ColetarDadosNovaPessoa();
                         gerenciador.Edit(pessoaAntiga.Id, pessoaAtualizada);
-                        menu.ExibirMensagem("Pessoa editada com sucesso!\n[Pressione Enter para continuar]");
+                        menu.ExibirMensagem("Pessoa editada com sucesso!\n[Pressione Enter para continuar]", ConsoleColor.Green);
                         menu.AguardarTecla();
                         break;
                 }
