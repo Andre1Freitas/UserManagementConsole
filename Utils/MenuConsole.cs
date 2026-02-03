@@ -29,6 +29,18 @@ namespace UserManagementConsole.Utils
                 Console.WriteLine($"{i + 1}. {pessoas[i].Nome} ({pessoas[i].Email})");
             }
         }
+        public void ExibirResultadosBusca(List<Pessoa> pessoas)
+        {
+            if (pessoas.Count == 0)
+            {
+                ExibirMensagem("Nenhuma pessoa encontrada", ConsoleColor.Red);
+                return;
+            }
+            for (int i = 0; i < pessoas.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {pessoas[i].Nome} ({pessoas[i].Email})");
+            }
+        }
 
         public void ExibirMensagem(string msg)
         {
@@ -133,6 +145,20 @@ namespace UserManagementConsole.Utils
                 }
                 ExibirMensagem("Entrada invalida! Digite apenas numeros", ConsoleColor.Red);
                 continue;
+            }
+        }
+        public string BuscarNomePessoa()
+        {
+            while (true)
+            {
+                Console.WriteLine("Digite parte do nome da pessoa: ");
+                string? parteNome = Console.ReadLine();
+                if (string.IsNullOrEmpty(parteNome))
+                {
+                    ExibirMensagem("Nome não pode ser vazio!", ConsoleColor.Red);
+                    continue;
+                }
+                return parteNome!;
             }
         }
         public bool ConfirmarAcao(string msg)

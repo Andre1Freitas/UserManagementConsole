@@ -8,6 +8,7 @@ namespace UserManagementConsole.Interfaces
         void Edit(Guid id, Pessoa novaPessoa);
         void Remove(Guid id);
         Pessoa? GetById(Guid id);
+        List<Pessoa> GetByName(string parteNome);
         List<Pessoa> GetAll();
         void Load();
         void Save();

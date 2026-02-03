@@ -33,6 +33,10 @@ namespace UserManagementConsole.Repositories
         {
             return pessoas.FirstOrDefault(x => x.Id == id);
         }
+        public List<Pessoa> GetByName(string parteNome)
+        {
+            return pessoas.Where(p => p.Nome.ToLower().Contains(parteNome.ToLower())).ToList();
+        }
         public List<Pessoa> GetAll()
         {
             return pessoas;

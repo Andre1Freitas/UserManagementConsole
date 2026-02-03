@@ -54,8 +54,9 @@ namespace UserManagementConsole
                         break;
 
                     case 4:
-                        Pessoa pessoaProcurada = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
-                        Console.WriteLine(pessoaProcurada);
+                        string pessoaProcurada = menu.BuscarNomePessoa();
+                        menu.ExibirResultadosBusca(gerenciador.ProcuraPorNome(pessoaProcurada));
+                        menu.ExibirMensagem("[Pressione Enter para continuar]");
                         menu.AguardarTecla();
                         break;
 

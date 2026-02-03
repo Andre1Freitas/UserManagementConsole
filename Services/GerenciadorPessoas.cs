@@ -40,6 +40,10 @@ namespace UserManagementConsole.Services
         {
             return _repository.GetById(id);
         }
+        public List<Pessoa> ProcuraPorNome(string parteNome)
+        {
+            return _repository.GetByName(parteNome);
+        }
         public List<Pessoa> GetAll()
         {
             return _repository.GetAll();
