@@ -38,7 +38,7 @@ namespace UserManagementConsole.Utils
             }
             for (int i = 0; i < pessoas.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {pessoas[i].Nome} ({pessoas[i].Email})");
+                Console.WriteLine($"{i + 1}. {pessoas[i].Nome} {pessoas[i].Idade} ({pessoas[i].Email}) {pessoas[i].Id}");
             }
         }
 
@@ -118,8 +118,16 @@ namespace UserManagementConsole.Utils
 
         public Guid PedirGuid(string mensagem)
         {
-            Console.Write(mensagem);
-            return Guid.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.Write(mensagem);
+                if (!Guid.TryParse(Console.ReadLine(), out Guid id))
+                {
+                    ExibirMensagem("Guid invalido!", ConsoleColor.Red);
+                    continue;
+                }
+                return id;
+            }
         }
 
         public Pessoa ColetarDadosNovaPessoa()
