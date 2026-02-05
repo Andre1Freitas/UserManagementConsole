@@ -138,6 +138,7 @@ namespace UserManagementConsole.Utils
 
         public Pessoa SelecionarPessoaDaLista(List<Pessoa> pessoas)
         {
+
             ExibirLista(pessoas);
             while (true)
             {
@@ -181,6 +182,16 @@ namespace UserManagementConsole.Utils
 
                 ExibirMensagem("Resposta invalida! Digite 's' para sim ou 'n' para não.", ConsoleColor.Red);
             }
+        }
+        public bool VerificarListaVazia(List<Pessoa> pessoas, string msg)
+        {
+            if (pessoas.Count == 0)
+            {
+                ExibirMensagem(msg, ConsoleColor.Red);
+                AguardarTecla();
+                return true;
+            }
+            return false;
         }
     }
 

@@ -55,6 +55,10 @@ namespace UserManagementConsole.Repositories
                     return;
                 }
             }
+            if(string.IsNullOrEmpty(File.ReadAllText(_filePath)))
+            {
+                return;
+            }
 
             string jsonString = File.ReadAllText(_filePath);
             List<Pessoa>? lista = JsonSerializer.Deserialize<List<Pessoa>>(jsonString);

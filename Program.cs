@@ -36,7 +36,12 @@ namespace UserManagementConsole
                         break;
 
                     case 2:
-                        Pessoa pessoaDeletar = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
+                        List<Pessoa> pessoas = gerenciador.GetAll();
+                        if (menu.VerificarListaVazia(pessoas, "Lista está vazia"))
+                        {
+                            break;
+                        }
+                        Pessoa pessoaDeletar = menu.SelecionarPessoaDaLista(pessoas);
                         if (menu.ConfirmarAcao($"Tem certeza que deseja remover {pessoaDeletar.Nome}? (s/n):"))
                         {
                             gerenciador.RemoverPessoa(pessoaDeletar.Id);
@@ -54,6 +59,10 @@ namespace UserManagementConsole
                         break;
 
                     case 4:
+                        if (menu.VerificarListaVazia(gerenciador.GetAll(), "Lista está vazia"))
+                        {
+                            break;
+                        }
                         string pessoaProcurada = menu.BuscarNomePessoa();
                         menu.ExibirResultadosBusca(gerenciador.ProcuraPorNome(pessoaProcurada));
                         menu.ExibirMensagem("[Pressione Enter para continuar]");
@@ -61,6 +70,10 @@ namespace UserManagementConsole
                         break;
 
                     case 5:
+                        if (menu.VerificarListaVazia(gerenciador.GetAll(), "Lista está vazia"))
+                        {
+                            break;
+                        }
                         Pessoa pessoaAntiga = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
                         Pessoa pessoaAtualizada = menu.ColetarDadosNovaPessoa();
                         gerenciador.Edit(pessoaAntiga.Id, pessoaAtualizada);
