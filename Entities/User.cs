@@ -2,34 +2,41 @@
 
 namespace UserManagementConsole.Entities
 {
-    public class Pessoa
+    public class User
     {
-        public string Nome { get; set; }
-        public int Idade { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
         public string Email { get; set; }
         public Guid Id { get; private set; }
 
-        public Pessoa(string nome, int idade, string email)
+        public User(string name, int age, string email)
         {
-            Nome = nome;
-            Idade = idade;
+            Name = name;
+            Age = age;
             Email = email;
             Id = Guid.NewGuid();
         }
         [JsonConstructor]
-        public Pessoa(Guid id, string nome, int idade, string email)
+        public User(Guid id, string name, int age, string email)
         {
             Id = id;
-            Nome = nome;
-            Idade = idade;
+            Name = name;
+            Age = age;
+            Email = email;
+        }
+
+        public void Update(string name, int age, string email)
+        {
+            Name = name;
+            Age = age;
             Email = email;
         }
 
         public override string ToString()
         {
-            return Nome
+            return Name
                 + " "
-                + Idade
+                + Age
                 + " "
                 + Email
                 + " "
