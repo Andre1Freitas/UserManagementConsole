@@ -68,12 +68,12 @@ namespace UserManagementConsole.Utils
             Console.Write("Nome: ");
             string name = Console.ReadLine();
 
-            var nameResult = Validacoes.ValidarNome(name);
-            while (!nameResult.isValido)
+            var nameResult = Validations.ValidateName(name);
+            while (!nameResult.isValid)
             {
-                DisplayMessage($"{nameResult.mensagemErro}", ConsoleColor.Red);
+                DisplayMessage($"{nameResult.errorMessage}", ConsoleColor.Red);
                 name = Console.ReadLine();
-                nameResult = Validacoes.ValidarNome(name);
+                nameResult = Validations.ValidateName(name);
             }
             return name;
         }
@@ -82,7 +82,7 @@ namespace UserManagementConsole.Utils
         {
             Console.Write("Idade: ");
             int age;
-            (bool isValido, string mensagemErro) ageResult;
+            (bool isValid, string errorMessage) ageResult;
             while (true)
             {
                 if (!int.TryParse(Console.ReadLine(), out age))
@@ -90,10 +90,10 @@ namespace UserManagementConsole.Utils
                     DisplayMessage("Idade Invalida. Digite um numero inteiro valido.", ConsoleColor.Red);
                     continue;
                 }
-                ageResult = Validacoes.ValidarIdade(age);
-                if (!ageResult.isValido)
+                ageResult = Validations.ValidateAge(age);
+                if (!ageResult.isValid)
                 {
-                    DisplayMessage($"{ageResult.mensagemErro}", ConsoleColor.Red);
+                    DisplayMessage($"{ageResult.errorMessage}", ConsoleColor.Red);
                     continue;
                 }
                 break;
@@ -105,12 +105,12 @@ namespace UserManagementConsole.Utils
         {
             Console.Write("Email: ");
             string email = Console.ReadLine()!;
-            var emailResult = Validacoes.ValidarEmail(email);
-            while (!emailResult.isValido)
+            var emailResult = Validations.ValidateEmail(email);
+            while (!emailResult.isValid)
             {
-                DisplayMessage($"{emailResult.mensagemErro}", ConsoleColor.Red);
+                DisplayMessage($"{emailResult.errorMessage}", ConsoleColor.Red);
                 email = Console.ReadLine();
-                emailResult = Validacoes.ValidarEmail(email);
+                emailResult = Validations.ValidateEmail(email);
             }
             return email;
         }

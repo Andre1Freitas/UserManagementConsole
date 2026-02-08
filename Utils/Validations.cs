@@ -2,43 +2,43 @@
 
 namespace UserManagementConsole.Utils
 {
-    static class Validacoes
+    static class Validations
     {
-        static public (bool isValido, string mensagemErro) ValidarNome(string nome)
+        static public (bool isValid, string errorMessage) ValidateName(string name)
         {
-            if (string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome))
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
                 return (false, "Nome está vazio ou com espaço. Digite novamente: ");
             }
-            if (nome.Length < 2)
+            if (name.Length < 2)
             {
                 return (false, "Nome muito curto. Digite novamente: ");
             }
-            if (nome.Length > 50)
+            if (name.Length > 50)
             {
                 return (false, "Nome muito longo. Digite novamente: ");
             }
-            if (Regex.IsMatch(nome, @"\d"))
+            if (Regex.IsMatch(name, @"\d"))
             {
                 return (false, "Nome tem números. Digite novamente: ");
             }
-            if (!Regex.IsMatch(nome, @"^[\p{L}\s]+$"))
+            if (!Regex.IsMatch(name, @"^[\p{L}\s]+$"))
             {
                 return (false, "Nome tem caracteres especiais. Digite novamente: ");
             }
             return (true, "");
         }
 
-        static public (bool isValido, string mensagemErro) ValidarIdade(int idade)
+        static public (bool isValid, string errorMessage) ValidateAge(int age)
         {
-            if (idade < 0 || idade > 120)
+            if (age < 0 || age > 120)
             {
                 return (false, "Idade deve estar entre 0 e 120. Digite uma idade valida: ");
             }
             return (true, "");
         }
 
-        static public (bool isValido, string mensagemErro) ValidarEmail(string email)
+        static public (bool isValid, string errorMessage) ValidateEmail(string email)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrWhiteSpace(email))
             {
