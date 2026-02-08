@@ -3,17 +3,17 @@ using UserManagementConsole.Interfaces;
 
 namespace UserManagementConsole.Services
 {
-    class GerenciadorPessoas
+    class PersonService
     {
         private readonly IUserRepository _repository;
 
-        public GerenciadorPessoas(IUserRepository repository)
+        public PersonService(IUserRepository repository)
         {
             _repository = repository;
             _repository.Load();
         }
 
-        public void CadastrarNovaPessoa(Pessoa p)
+        public void CadastrarNovaPessoa(User p)
         {
             _repository.Add(p);
             _repository.Save();
@@ -24,27 +24,27 @@ namespace UserManagementConsole.Services
             _repository.Remove(id);
             _repository.Save();
         }
-        public void Edit(Guid id, Pessoa novaPessoa)
+        public void Edit(Guid id, User novaPessoa)
         {
             _repository.Edit(id, novaPessoa);
             _repository.Save();
         }
         public void PercorrerLista()
         {
-            foreach (Pessoa p in _repository.GetAll())
+            foreach (User p in _repository.GetAll())
             {
                 Console.WriteLine(p);
             }
         }
-        public Pessoa ProcuraUmaPessoaNaLista(Guid id)
+        public User ProcuraUmaPessoaNaLista(Guid id)
         {
             return _repository.GetById(id);
         }
-        public List<Pessoa> ProcuraPorNome(string parteNome)
+        public List<User> ProcuraPorNome(string parteNome)
         {
             return _repository.GetByName(parteNome);
         }
-        public List<Pessoa> GetAll()
+        public List<User> GetAll()
         {
             return _repository.GetAll();
         }
