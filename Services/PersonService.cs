@@ -13,36 +13,29 @@ namespace UserManagementConsole.Services
             _repository.Load();
         }
 
-        public void CadastrarNovaPessoa(User p)
+        public void AddUser(User user)
         {
-            _repository.Add(p);
+            _repository.Add(user);
             _repository.Save();
         }
 
-        public void RemoverPessoa(Guid id)
+        public void DeleteUser(Guid id)
         {
             _repository.Remove(id);
             _repository.Save();
         }
-        public void Edit(Guid id, User novaPessoa)
+        public void Edit(Guid id, User updatedUser)
         {
-            _repository.Edit(id, novaPessoa);
+            _repository.Edit(id, updatedUser);
             _repository.Save();
         }
-        public void PercorrerLista()
-        {
-            foreach (User p in _repository.GetAll())
-            {
-                Console.WriteLine(p);
-            }
-        }
-        public User ProcuraUmaPessoaNaLista(Guid id)
+        public User GetUserById(Guid id)
         {
             return _repository.GetById(id);
         }
-        public List<User> ProcuraPorNome(string parteNome)
+        public List<User> SearchByName(string namePart)
         {
-            return _repository.GetByName(parteNome);
+            return _repository.GetByName(namePart);
         }
         public List<User> GetAll()
         {

@@ -11,40 +11,40 @@ namespace UserManagementConsole
         static void Main(string[] args)
         {
             IUserRepository repository = new UserJsonRepository();
-            GerenciadorPessoas gerenciador = new GerenciadorPessoas(repository);
+            PersonService personService = new PersonService(repository);
             MenuConsole menu = new MenuConsole();
 
-            int opcao = 1;
-            while (opcao != 0)
+            int option = 1;
+            while (option != 0)
             {
-                opcao = menu.ExibirMenuELerOpcao();
-                if (opcao < 0 || opcao > 5)
+                option = menu.ExibirMenuELerOpcao();
+                if (option < 0 || option > 5)
                 {
                     menu.ExibirMensagem("Opção invalida!\n[Pressione Enter para continuar]", ConsoleColor.Red);
                     menu.AguardarTecla();
                     menu.LimparTela();
                     continue;
                 }
-                switch (opcao)
+                switch (option)
                 {
                     case 0: break;
 
                     case 1:
-                        gerenciador.CadastrarNovaPessoa(menu.ColetarDadosNovaPessoa());
+                        personService.AddUser(menu.ColetarDadosNovaPessoa());
                         menu.ExibirMensagem("Pessoa cadastrada com sucesso!\n[Pressione Enter para continuar]", ConsoleColor.Green);
                         menu.AguardarTecla();
                         break;
 
                     case 2:
-                        List<Pessoa> pessoas = gerenciador.GetAll();
-                        if (menu.VerificarListaVazia(pessoas, "Lista está vazia"))
+                        List<User> users = personService.GetAll();
+                        if (menu.VerificarListaVazia(users, "Lista está vazia"))
                         {
                             break;
                         }
-                        Pessoa pessoaDeletar = menu.SelecionarPessoaDaLista(pessoas);
-                        if (menu.ConfirmarAcao($"Tem certeza que deseja remover {pessoaDeletar.Nome}? (s/n):"))
+                        User userToDelete = menu.SelecionarPessoaDaLista(users);
+                        if (menu.ConfirmarAcao($"Tem certeza que deseja remover {userToDelete.Name}? (s/n):"))
                         {
-                            gerenciador.RemoverPessoa(pessoaDeletar.Id);
+                            personService.DeleteUser(userToDelete.Id);
                             menu.ExibirMensagem("Pessoa excluida com sucesso!\n[Pressione Enter para continuar]", ConsoleColor.Green);
                             menu.AguardarTecla();
                             break;
@@ -54,29 +54,30 @@ namespace UserManagementConsole
                         break;
 
                     case 3:
-                        menu.ExibirLista(gerenciador.GetAll());
+                        menu.ExibirLista(personService.GetAll());
                         menu.AguardarTecla();
                         break;
 
                     case 4:
-                        if (menu.VerificarListaVazia(gerenciador.GetAll(), "Lista está vazia"))
+                        if (menu.VerificarListaVazia(personService.GetAll(), "Lista está vazia"))
                         {
                             break;
                         }
-                        string pessoaProcurada = menu.BuscarNomePessoa();
-                        menu.ExibirResultadosBusca(gerenciador.ProcuraPorNome(pessoaProcurada));
+                        string nameSearch = menu.BuscarNomePessoa();
+                        menu.ExibirResultadosBusca(personService.SearchByName(nameSearch));
                         menu.ExibirMensagem("[Pressione Enter para continuar]");
                         menu.AguardarTecla();
                         break;
 
                     case 5:
-                        if (menu.VerificarListaVazia(gerenciador.GetAll(), "Lista está vazia"))
+                        users = personService.GetAll();
+                        if (menu.VerificarListaVazia(users, "Lista está vazia"))
                         {
                             break;
                         }
-                        Pessoa pessoaAntiga = menu.SelecionarPessoaDaLista(gerenciador.GetAll());
-                        Pessoa pessoaAtualizada = menu.ColetarDadosNovaPessoa();
-                        gerenciador.Edit(pessoaAntiga.Id, pessoaAtualizada);
+                        User existingUser = menu.SelecionarPessoaDaLista(users);
+                        User updatedUser = menu.ColetarDadosNovaPessoa();
+                        personService.Edit(existingUser.Id, updatedUser);
                         menu.ExibirMensagem("Pessoa editada com sucesso!\n[Pressione Enter para continuar]", ConsoleColor.Green);
                         menu.AguardarTecla();
                         break;
