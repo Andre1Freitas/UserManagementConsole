@@ -4,12 +4,12 @@ namespace UserManagementConsole.Interfaces
 {
     public interface IUserRepository
     {
-        void Add(Pessoa pessoa);
-        void Edit(Guid id, Pessoa novaPessoa);
+        void Add(User pessoa);
+        void Edit(Guid id, User novaPessoa);
         void Remove(Guid id);
-        Pessoa? GetById(Guid id);
-        List<Pessoa> GetByName(string parteNome);
-        List<Pessoa> GetAll();
+        User? GetById(Guid id);
+        List<User> GetByName(string parteNome);
+        List<User> GetAll();
         void Load();
         void Save();
     }
