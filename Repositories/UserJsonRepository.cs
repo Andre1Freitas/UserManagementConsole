@@ -9,41 +9,39 @@ namespace UserManagementConsole.Repositories
     {
         private readonly string _filePath = @"..\..\..\Data\users.json";
         private readonly string _folderPath = @"..\..\..\Data\";
-        private List<Pessoa> pessoas = new List<Pessoa>();
+        private List<User> users = new List<User>();
 
-        public void Add(Pessoa pessoa)
+        public void Add(User user)
         {
-            pessoas.Add(pessoa);
+            users.Add(user);
         }
-        public void Edit(Guid id, Pessoa novaPessoa)
+        public void Edit(Guid id, User newUser)
         {
-            Pessoa? pessoaEditar = pessoas.FirstOrDefault(x => x.Id == id);
-            if (pessoaEditar != null)
+            User? existingUser = users.FirstOrDefault(x => x.Id == id);
+            if (existingUser != null)
             {
-                pessoaEditar.Nome = novaPessoa.Nome;
-                pessoaEditar.Email = novaPessoa.Email;
-                pessoaEditar.Idade = novaPessoa.Idade;
+                existingUser.Update(newUser.Name, newUser.Age, newUser.Email);
             }
         }
         public void Remove(Guid id)
         {
-            pessoas.RemoveAll(x => x.Id == id);
+            users.RemoveAll(x => x.Id == id);
         }
-        public Pessoa? GetById(Guid id)
+        public User? GetById(Guid id)
         {
-            return pessoas.FirstOrDefault(x => x.Id == id);
+            return users.FirstOrDefault(x => x.Id == id);
         }
-        public List<Pessoa> GetByName(string parteNome)
+        public List<User> GetByName(string parteNome)
         {
-            return pessoas.Where(p => p.Nome.ToLower().Contains(parteNome.ToLower())).ToList();
+            return users.Where(p => p.Name.ToLower().Contains(parteNome.ToLower())).ToList();
         }
-        public List<Pessoa> GetAll()
+        public List<User> GetAll()
         {
-            return pessoas;
+            return users;
         }
         public void Load()
         {
-            pessoas.Clear();
+            users.Clear();
             if (!Directory.Exists(_folderPath))
             {
                 Directory.CreateDirectory(_folderPath);
@@ -61,10 +59,10 @@ namespace UserManagementConsole.Repositories
             }
 
             string jsonString = File.ReadAllText(_filePath);
-            List<Pessoa>? lista = JsonSerializer.Deserialize<List<Pessoa>>(jsonString);
+            List<User>? lista = JsonSerializer.Deserialize<List<User>>(jsonString);
             if (lista != null)
             {
-                pessoas = lista;
+                users = lista;
             }
         }
         public void Save()
@@ -75,7 +73,7 @@ namespace UserManagementConsole.Repositories
             }
 
             var option = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(pessoas, option);
+            string jsonString = JsonSerializer.Serialize(users, option);
 
             File.WriteAllText(_filePath, jsonString);
         }
