@@ -1,154 +1,172 @@
 # UserManagementConsole
 
-Uma aplicação console em C# para gerenciamento de usuários, focada em boas práticas de arquitetura, Clean Code e persistência de dados.
+A console-based user management application in C#, focused on architectural best practices, Clean Code, and data persistence.
 
-## 📌 Sobre o Projeto
+## 📌 About the Project
 
-Este projeto é um **sistema de gerenciamento de usuários** que permite operações completas de CRUD (Criar, Ler, Atualizar, Remover). 
+This project is a **user management system** that provides full CRUD operations (Create, Read, Update, Delete).
 
-Desenvolvido como projeto de estudo para transição de carreira, simula um cenário real de backend com foco em **arquitetura desacoplada**, **código limpo** e **evolução incremental**.
+Developed as a learning project for career transition to Backend Development, it simulates a real backend scenario with focus on **decoupled architecture**, **clean code**, and **incremental evolution**.
 
-### 🎯 Diferenciais Técnicos
+### 🎯 Technical Highlights
 
-O projeto evoluiu de um código simples para uma arquitetura robusta, aplicando conceitos fundamentais de Engenharia de Software:
+The project evolved from simple code to robust architecture, applying fundamental Software Engineering concepts:
 
-* **Repository Pattern:** Lógica de persistência totalmente isolada das regras de negócio
-* **Dependency Injection (DI):** Inversão de controle para gerenciar dependências
+* **Repository Pattern:** Data persistence logic completely isolated from business rules
+* **Dependency Injection (DI):** Inversion of control for dependency management
 * **SOLID Principles:** Single Responsibility, Dependency Inversion, Interface Segregation
-* **GUID como identificador:** IDs únicos e distribuídos, preparando para ambientes multi-usuário
-* **JSON Serialization:** Migração de CSV para JSON com `System.Text.Json`
-* **Separação de Camadas:** UI (MenuConsole), Serviços (GerenciadorPessoas), Dados (Repository)
+* **GUID as identifier:** Unique and distributed IDs, preparing for multi-user environments
+* **JSON Serialization:** Migration from CSV to JSON using `System.Text.Json`
+* **Layer Separation:** UI (MenuConsole), Services (PersonService), Data (Repository)
+* **English Codebase:** Professional naming conventions following industry standards
 
 ---
 
-## ⚙️ Funcionalidades
+## ⚙️ Features
 
-* ✅ **Cadastro:** Criação de usuários com validação rigorosa (Nome, Idade, Email)
-* ✅ **Listagem:** Exibição numerada de todos os usuários
-* ✅ **Edição:** Atualização de dados de usuários existentes
-* ✅ **Remoção:** Exclusão por seleção numerada
-* ✅ **Busca:** Localização de usuários na lista
-* ✅ **Persistência JSON:** Salvamento automático em `users.json`
-* ✅ **Recuperação Automática:** Carregamento seguro ao iniciar o sistema
-* ✅ **Interface Limpa:** Menu interativo com validações em tempo real
+* ✅ **User Registration:** Create users with strict validation (Name, Age, Email)
+* ✅ **Listing:** Numbered display of all users
+* ✅ **Editing:** Update existing user data
+* ✅ **Deletion:** Remove users with confirmation prompt
+* ✅ **Search:** Find users by partial name match (case-insensitive)
+* ✅ **JSON Persistence:** Automatic saving to `users.json`
+* ✅ **Auto-Recovery:** Safe data loading on system startup
+* ✅ **Clean Interface:** Interactive menu with real-time validation
+* ✅ **Colored Messages:** Visual feedback (green=success, red=error, yellow=warning)
+* ✅ **Empty List Handling:** Prevents operations on empty data with user-friendly messages
 
 ---
 
-## 🧱 Estrutura do Projeto
+## 🧱 Project Structure
 
-Organização em camadas lógicas seguindo padrões de arquitetura:
-
+Organized in logical layers following architectural patterns:
 ```
 UserManagementConsole/
-├── Entities/           # Modelos de domínio (Pessoa.cs)
-├── Interfaces/         # Contratos (IUserRepository.cs)
-├── Repositories/       # Persistência de dados
-│   ├── UserJsonRepository.cs    # Implementação atual (JSON)
-│   └── UserCsvRepository.cs     # Legado (mantido para referência)
-├── Services/           # Regras de negócio (GerenciadorPessoas.cs)
-├── Utils/              # Validadores e UI
-│   ├── Validacoes.cs
-│   └── MenuConsole.cs  # Camada de apresentação
-├── Data/               # Arquivos de dados (users.json)
-└── Program.cs          # Ponto de entrada
+├── Entities/           # Domain models (User.cs)
+├── Interfaces/         # Contracts (IUserRepository.cs)
+├── Repositories/       # Data persistence
+│   ├── UserJsonRepository.cs    # Current implementation (JSON)
+│   └── UserCsvRepository.cs     # Legacy (kept for reference)
+├── Services/           # Business logic (PersonService.cs)
+├── Utils/              # Validators and UI
+│   ├── Validations.cs
+│   └── MenuConsole.cs  # Presentation layer
+├── Data/               # Data files (users.json)
+└── Program.cs          # Entry point
 ```
 
 ---
 
-## 🚀 Evolução do Projeto
+## 🚀 Project Evolution
 
-### ✅ Versão 1.0 - Fundação (Concluída)
-* CRUD básico em memória
-* Estrutura de pastas organizada
-* Validações com Regex
+### ✅ Version 1.0 - Foundation (Completed)
+* Basic in-memory CRUD
+* Organized folder structure
+* Regex validations
 
-### ✅ Versão 2.0 - Persistência CSV (Concluída)
-* Implementação do Repository Pattern
-* Persistência em arquivo CSV
-* Injeção de Dependência
-* Carregamento seguro com validação
+### ✅ Version 2.0 - CSV Persistence (Completed)
+* Repository Pattern implementation
+* CSV file persistence
+* Dependency Injection
+* Safe loading with validation
 
-### ✅ Versão 3.0 - Migração JSON + GUID (Atual)
-* **GUID** como identificador único (preparação para sistemas distribuídos)
-* Migração de **CSV para JSON** (serialização nativa)
-* **Funcionalidade de edição** implementada
-* **Refatoração completa da UI** (classe MenuConsole)
-* Redução de ~150 para ~45 linhas no Program.cs
-* Eliminação de código duplicado
+### ✅ Version 3.0 - JSON Migration + GUID (Completed)
+* **GUID** as unique identifier (preparation for distributed systems)
+* Migration from **CSV to JSON** (native serialization)
+* **Edit functionality** implemented
+* **Complete UI refactoring** (MenuConsole class)
+* Reduction from ~150 to ~45 lines in Program.cs
+* Eliminated code duplication
 
-### 🔜 Versão 4.0 - Melhorias de UX (Planejada)
-* Busca por parte do nome (filtro parcial)
-* Mensagens coloridas (sucesso/erro)
-* Confirmação antes de remover
-* Tratamento robusto de exceções
-* Paginação para listas grandes
+### ✅ Version 4.0 - UX Improvements + English Translation (Current)
+* **Partial name search** with case-insensitive filtering
+* **Colored console messages** (success/error/warning)
+* **Confirmation prompts** before deletion
+* **Robust exception handling** and GUID validation
+* **Empty list validation** before operations
+* **Complete codebase translation to English**
+* Professional naming conventions (PersonService, User, Validations)
 
-### 🌐 Versão 5.0 - Migração para API REST (Próximo Projeto)
-* Conversão para ASP.NET Core Web API
-* Banco de dados com Entity Framework Core
-* Endpoints REST (GET, POST, PUT, DELETE)
-* Autenticação JWT
-* Documentação com Swagger
-* Deploy em nuvem
+### 🔜 Version 5.0 - Unit Tests (Planned)
+* xUnit test setup
+* Validation method tests
+* Service layer tests with mocking
+* Test coverage report
+
+### 🌐 Version 6.0 - REST API Migration (Next Project)
+* Conversion to ASP.NET Core Web API
+* Database with Entity Framework Core + SQLite
+* REST endpoints (GET, POST, PUT, DELETE)
+* JWT Authentication
+* Swagger documentation
+* Cloud deployment
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 
 * **C# (.NET 8)**
-* **System.Text.Json** - Serialização/Deserialização
-* **LINQ** - Consultas em coleções
-* **Guid** - Identificadores únicos
-* **Repository Pattern** - Arquitetura
-* **Dependency Injection** - Desacoplamento
+* **System.Text.Json** - Serialization/Deserialization
+* **LINQ** - Collection queries
+* **Guid** - Unique identifiers
+* **Repository Pattern** - Architecture
+* **Dependency Injection** - Decoupling
 
 ---
 
-## ▶️ Como Executar
+## ▶️ How to Run
 
-1. **Clone o repositório:**
-   ```bash
+1. **Clone the repository:**
+```bash
    git clone https://github.com/Andre1Freitas/UserManagementConsole.git
-   ```
+```
 
-2. **Navegue até a pasta:**
-   ```bash
+2. **Navigate to folder:**
+```bash
    cd UserManagementConsole
-   ```
+```
 
-3. **Restaure e execute:**
-   ```bash
+3. **Restore and run:**
+```bash
    dotnet restore
    dotnet run
-   ```
+```
 
-4. **Resultado:**
-   * O arquivo `users.json` será criado automaticamente em `Data/`
-   * Interface interativa aparecerá no console
-
----
-
-## 📚 Aprendizados e Conceitos Aplicados
-
-Durante o desenvolvimento deste projeto, foram aplicados:
-
-* **Clean Code:** Métodos pequenos, nomes descritivos, responsabilidade única
-* **Refatoração:** Código evoluído iterativamente (CSV → JSON, Program gigante → MenuConsole)
-* **Versionamento:** Commits semânticos seguindo Conventional Commits
-* **Arquitetura em Camadas:** Separação clara entre UI, Serviços e Dados
-* **Princípios SOLID:** Aplicados em Interfaces, Repository e Services
-* **Boas Práticas Git:** Commits atômicos, mensagens descritivas, histórico limpo
+4. **Result:**
+   * `users.json` file will be automatically created in `Data/`
+   * Interactive interface will appear in console
 
 ---
 
-## 🎓 Sobre o Desenvolvedor
+## 📚 Learnings and Applied Concepts
 
-Projeto desenvolvido por **André Freitas** como parte do aprendizado para transição de carreira para Desenvolvedor Backend.
+During the development of this project, the following were applied:
 
-**Objetivo:** Construir um portfólio sólido demonstrando evolução técnica, capacidade de refatoração e aplicação de padrões de mercado.
+* **Clean Code:** Small methods, descriptive names, single responsibility
+* **Refactoring:** Code evolved iteratively (CSV → JSON, large Program → MenuConsole)
+* **Version Control:** Semantic commits following Conventional Commits
+* **Layered Architecture:** Clear separation between UI, Services, and Data
+* **SOLID Principles:** Applied in Interfaces, Repository, and Services
+* **Git Best Practices:** Atomic commits, descriptive messages, clean history
+* **English Codebase:** Professional naming for portfolio and international standards
 
 ---
 
-## 📝 Licença
+## 🎓 About the Developer
 
-Este projeto está sob licença MIT. Sinta-se livre para usar como referência de estudos!
+Project developed by **André Freitas** as part of learning journey for career transition to Backend Developer.
+
+**Goal:** Build a solid portfolio demonstrating technical evolution, refactoring skills, and application of industry patterns.
+
+**Learning Timeline:**
+- v1.0: Console basics and CRUD operations
+- v2.0: Architecture patterns (Repository, DI)
+- v3.0: Data migration and UI refactoring
+- v4.0: UX polish and professional code standards
+- v5.0+: Testing and API development (in progress)
+
+---
+
+## 📝 License
+
+This project is under MIT License. Feel free to use it as study reference!
