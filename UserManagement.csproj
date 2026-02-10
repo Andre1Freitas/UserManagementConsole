@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Compile Remove="UserManagement.Tests\**" />
+    <EmbeddedResource Remove="UserManagement.Tests\**" />
+    <None Remove="UserManagement.Tests\**" />
   </ItemGroup>
-
-</Project>
+  </Project>

@@ -31,7 +31,7 @@ namespace UserManagementConsole.Services
         }
         public User GetUserById(Guid id)
         {
-            return _repository.GetById(id);
+            return _repository.GetById(id)!;
         }
         public List<User> SearchByName(string namePart)
         {

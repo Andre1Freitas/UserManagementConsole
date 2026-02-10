@@ -2,7 +2,7 @@
 
 namespace UserManagementConsole.Utils
 {
-    static class Validations
+    public static class Validations
     {
         static public (bool isValid, string errorMessage) ValidateName(string name)
         {

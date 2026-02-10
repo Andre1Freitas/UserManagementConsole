@@ -66,13 +66,13 @@ namespace UserManagementConsole.Utils
         public string RequestValidName()
         {
             Console.Write("Nome: ");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine()!;
 
             var nameResult = Validations.ValidateName(name);
             while (!nameResult.isValid)
             {
                 DisplayMessage($"{nameResult.errorMessage}", ConsoleColor.Red);
-                name = Console.ReadLine();
+                name = Console.ReadLine()!;
                 nameResult = Validations.ValidateName(name);
             }
             return name;
@@ -109,7 +109,7 @@ namespace UserManagementConsole.Utils
             while (!emailResult.isValid)
             {
                 DisplayMessage($"{emailResult.errorMessage}", ConsoleColor.Red);
-                email = Console.ReadLine();
+                email = Console.ReadLine()!;
                 emailResult = Validations.ValidateEmail(email);
             }
             return email;
