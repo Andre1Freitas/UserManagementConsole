@@ -104,15 +104,15 @@ namespace UserManagementConsole.Utils
         public string RequestValidEmail()
         {
             Console.Write("Email: ");
-            string email = Console.ReadLine()!;
-            var emailResult = Validations.ValidateEmail(email);
+            string? email = Console.ReadLine();
+            var emailResult = Validations.ValidateEmail(email!);
             while (!emailResult.isValid)
             {
                 DisplayMessage($"{emailResult.errorMessage}", ConsoleColor.Red);
                 email = Console.ReadLine()!;
                 emailResult = Validations.ValidateEmail(email);
             }
-            return email;
+            return email!;
         }
 
         public Guid RequestValidGuid(string msg)

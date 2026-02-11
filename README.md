@@ -111,6 +111,7 @@ UserManagementConsole/
 * **Guid** - Unique identifiers
 * **Repository Pattern** - Architecture
 * **Dependency Injection** - Decoupling
+* * **xUnit** - Unit testing framework
 
 ---
 
@@ -148,7 +149,8 @@ During the development of this project, the following were applied:
 * **Layered Architecture:** Clear separation between UI, Services, and Data
 * **SOLID Principles:** Applied in Interfaces, Repository, and Services
 * **Git Best Practices:** Atomic commits, descriptive messages, clean history
-* **English Codebase:** Professional naming for portfolio and international standards
+* **English Codebase:** Professional naming for portfolio and international standards]
+* **Unit Testing:** Automated testing with xUnit, AAA pattern, Theory/Fact attributes
 
 ---
 
