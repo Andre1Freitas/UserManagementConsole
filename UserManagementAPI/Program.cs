@@ -10,7 +10,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<UserManagementAPI.Interfaces.IUserRepository, UserManagementAPI.Repositories.UserJsonRepository>();
+builder.Services.AddScoped<UserManagementAPI.Interfaces.IUserRepository, UserManagementAPI.Repositories.UserEFRepository>();
 builder.Services.AddScoped<UserManagementAPI.Services.UserService>();
 
 var app = builder.Build();

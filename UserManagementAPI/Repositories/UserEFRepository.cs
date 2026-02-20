@@ -21,7 +21,15 @@ public class UserEFRepository : IUserRepository
 
     public void Add(User user) => _context.Users.Add(user);
 
-    public void Update(User user) => _context.Users.Update(user);
+    public void Update(User user)
+    {
+        var existingUser = _context.Users.Find(user.Id);
+        if (existingUser != null)
+        {
+            existingUser.Update(user.Name, user.Age, user.Email);
+            Save();
+        }
+    }
 
     public void Delete(User user) => _context.Users.Remove(user);
 
