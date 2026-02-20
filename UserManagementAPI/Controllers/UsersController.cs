@@ -92,13 +92,11 @@ namespace UserManagementAPI.Controllers
                 return BadRequest(new { error = emailValidation.errorMessage });
             }
 
-            var updatedUser = new User(dto.Name, dto.Age, dto.Email);
+            var updatedUser = new User(existingUser.Id, dto.Name, dto.Age, dto.Email);
 
-            _userService.Edit(id, updatedUser);
+            _userService.Update(updatedUser);
 
-            var user = _userService.GetUserById(id);
-
-            return Ok(user);
+            return Ok(updatedUser);
         }
 
         [HttpDelete("{id}")]
@@ -110,7 +108,7 @@ namespace UserManagementAPI.Controllers
                 return NotFound(new { error = "User not found" });
             }
 
-            _userService.DeleteUser(id);
+            _userService.DeleteUser(user);
 
             return NoContent();
         }

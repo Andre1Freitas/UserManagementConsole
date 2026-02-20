@@ -4,13 +4,12 @@ namespace UserManagementAPI.Interfaces
 {
     public interface IUserRepository
     {
-        void Add(User pessoa);
-        void Edit(Guid id, User novaPessoa);
-        void Remove(Guid id);
+        void Add(User user);
+        void Update(User user);
+        void Delete(User user);
         User? GetById(Guid id);
-        List<User> GetByName(string parteNome);
+        List<User> GetByName(string partName);
         List<User> GetAll();
-        void Load();
         void Save();
     }
 }

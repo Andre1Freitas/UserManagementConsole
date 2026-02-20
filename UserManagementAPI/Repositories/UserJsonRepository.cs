@@ -20,20 +20,18 @@ namespace UserManagementAPI.Repositories
             Save();
         }
 
-        public void Edit(Guid id, User newUser)
+        public void Update(User newUser)
         {
-            User? existingUser = _users.FirstOrDefault(u => u.Id == id);
+            User? existingUser = _users.FirstOrDefault(u => u.Id == newUser.Id);
             if (existingUser != null)
             {
                 existingUser.Update(newUser.Name, newUser.Age, newUser.Email);
-                Save();
             }
         }
 
-        public void Remove(Guid id)
+        public void Delete(User user)
         {
-            _users.RemoveAll(u => u.Id == id);
-            Save();
+            _users.RemoveAll(u => u.Id == user.Id);
         }
 
         public User? GetById(Guid id)

@@ -18,14 +18,14 @@ namespace UserManagementAPI.Services
             _repository.Save();
         }
 
-        public void DeleteUser(Guid id)
+        public void DeleteUser(User user)
         {
-            _repository.Remove(id);
+            _repository.Delete(user);
             _repository.Save();
         }
-        public void Edit(Guid id, User updatedUser)
+        public void Update(User updatedUser)
         {
-            _repository.Edit(id, updatedUser);
+            _repository.Update(updatedUser);
             _repository.Save();
         }
         public User GetUserById(Guid id)
