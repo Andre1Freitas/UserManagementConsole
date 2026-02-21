@@ -1,6 +1,6 @@
 # UserManagement
 
-A user management system built in C#, evolving from a Console application to a REST API — focused on architectural best practices, Clean Code, and incremental learning.
+A user management system built in C#, evolving from a Console application to a REST API with a real database — focused on architectural best practices, Clean Code, and incremental learning.
 
 ## 📌 About the Project
 
@@ -9,7 +9,7 @@ This repository contains **two projects** that share the same domain, representi
 | Project | Description | Status |
 |---|---|---|
 | `UserManagementConsole` | Console CRUD with JSON persistence | ✅ v4.0 Complete |
-| `UserManagementAPI` | REST API with ASP.NET Core | ✅ v5.0 Complete |
+| `UserManagementAPI` | REST API with ASP.NET Core + SQLite | ✅ v6.0 Complete |
 
 Developed as a learning project for career transition to Backend Development, simulating a real backend scenario with focus on **decoupled architecture**, **clean code**, and **incremental evolution**.
 
@@ -30,17 +30,20 @@ UserManagement/
 │   ├── Program.cs
 │   └── UserManagement.Tests/            ← 13 unit tests
 │
-└── UserManagementAPI/                   ← REST API v5.0
+└── UserManagementAPI/                   ← REST API v6.0
     ├── Controllers/UsersController.cs
     ├── DTOs/
     │   ├── CreateUserDto.cs
     │   └── UpdateUserDto.cs
     ├── Entities/User.cs
     ├── Interfaces/IUserRepository.cs
-    ├── Repositories/UserJsonRepository.cs
+    ├── Repositories/
+    │   ├── UserEFRepository.cs          ← Current (EF Core + SQLite)
+    │   └── UserJsonRepository.cs        ← Legacy (kept for reference)
     ├── Services/UserService.cs
     ├── Validations/Validations.cs
-    ├── Data/users.json
+    ├── Data/AppDbContext.cs
+    ├── Migrations/
     └── Program.cs
 ```
 
@@ -77,9 +80,9 @@ dotnet run
 
 ---
 
-## 🌐 Project 2 — UserManagementAPI (v5.0)
+## 🌐 Project 2 — UserManagementAPI (v6.0)
 
-REST API built with ASP.NET Core, exposing the same domain via HTTP endpoints.
+REST API built with ASP.NET Core, exposing the same domain via HTTP endpoints with SQLite database persistence.
 
 ### ⚙️ Endpoints
 
@@ -93,11 +96,11 @@ REST API built with ASP.NET Core, exposing the same domain via HTTP endpoints.
 
 ### 🧱 Architecture
 
-- **ASP.NET Core Web API (.NET 8)**
+- **ASP.NET Core Web API (.NET 10)**
+- **Entity Framework Core + SQLite** — real database with migrations
+- **Repository Pattern** — swappable persistence (JSON → SQLite with no changes to Service/Controller)
 - **DTOs** — separates API input from domain model
 - **Swagger** — interactive API documentation
-- **JSON persistence** — same pattern as Console (temporary, before database)
-- **Reused validations** — same `Validations.cs` from Console project
 
 ### ▶️ How to Run
 
@@ -127,15 +130,17 @@ Partial search, colored messages, 13 unit tests with xUnit, full codebase in Eng
 ### ✅ v5.0 — REST API
 ASP.NET Core Web API with 5 endpoints, DTOs, Swagger, and JSON persistence.
 
-### 🔜 v6.0 — Entity Framework Core + SQLite *(next)*
-Replace JSON with a real database using EF Core migrations and SQLite.
+### ✅ v6.0 — Entity Framework Core + SQLite
+Replaced JSON with a real database using EF Core migrations and SQLite. Repository Pattern allowed the swap with zero changes to Service and Controller layers.
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **C# (.NET 8)**
+- **C# (.NET 10)**
 - **ASP.NET Core Web API**
+- **Entity Framework Core** — ORM and migrations
+- **SQLite** — database
 - **System.Text.Json**
 - **xUnit** — unit testing
 - **Swagger / Swashbuckle**
